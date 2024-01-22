@@ -17,7 +17,7 @@ app.use(cookieParser());
 app.use(morgan("dev"));
 
 app.get("/", (req, res) => {
-    res.send("server started");
+    res.send("server started ,  edit by monir ");
 });
 
 // import routers
