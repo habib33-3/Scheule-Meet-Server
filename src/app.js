@@ -18,8 +18,14 @@ app.use(morgan("dev"));
 
 app.get("/", (req, res) => {
     res.send("server started ,  edit by monir ");
+    res.send("server running");
 });
 
 // import routers
+
+// user routes
+import userRouter from "./routes/user.routes.js";
+
+app.use("/api/v1/users", userRouter);
 
 export default app;
