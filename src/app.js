@@ -18,7 +18,6 @@ app.use(morgan("dev"));
 
 app.get("/", (req, res) => {
     res.send("server started ,  edit by monir ");
-    res.send("server running");
 });
 
 // import routers
