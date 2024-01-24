@@ -1,6 +1,5 @@
 import { User } from "../models/user.model.js";
 
-
 // controller for save user to db
 const saveUserToDb = async (req, res) => {
     try {
