@@ -1,5 +1,9 @@
 import { Router } from "express";
-import { createToken, saveUserToDb } from "../controller/user.controller.js";
+import {
+    createToken,
+    logOut,
+    saveUserToDb,
+} from "../controller/user.controller.js";
 
 const router = Router();
 
@@ -8,5 +12,8 @@ router.post("/saveUser", saveUserToDb);
 
 // route for create jwt token
 router.post("/createToken", createToken);
+
+// route for logout
+router.post("/logout", logOut);
 
 export default router;
