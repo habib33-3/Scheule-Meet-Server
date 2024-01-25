@@ -14,14 +14,7 @@ const MeetingSchema = new Schema(
             type: String,
             required: true,
         },
-        guestName: {
-            type: String,
-            required: true,
-        },
-        guestEmail: {
-            type: String,
-            required: true,
-        },
+
         date: {
             type: Date,
             required: true,
