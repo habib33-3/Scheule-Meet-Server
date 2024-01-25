@@ -72,3 +72,4 @@ ehthumbs.db
 
 # pnpm
 pnpm-lock.yaml
+package-lock.json

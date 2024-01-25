@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { saveUserToDb } from "../controller/user.controller.js";
+import { getBlogs } from "../controller/blog.controller.js";
 
 const router = Router();
 
 // route for save user on db
-router.post("/saveUser", saveUserToDb);
+router.get("/getblogs", getBlogs);
 
 export default router;

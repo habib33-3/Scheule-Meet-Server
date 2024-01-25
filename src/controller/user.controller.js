@@ -73,4 +73,20 @@ const createToken = async (req, res) => {
     }
 };
 
-export { saveUserToDb, createToken };
+const logOut = async (req, res) => {
+    try {
+        res.clearCookie("token");
+        return res.status(200).json({
+            message: "Logged out successfully",
+            success: true,
+        });
+    } catch (error) {
+        console.error("Server Error during logout", error);
+        return res.status(500).json({
+            message: "Server Error during logout",
+            success: false,
+        });
+    }
+};
+
+export { saveUserToDb, createToken, logOut };
