@@ -25,9 +25,6 @@ const blogSchema = new Schema({
         type: String,
         required: true,
     },
-    date: {
-        type: String,
-    },
 });
 
 export const blogModel = model("blogs", blogSchema);

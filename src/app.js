@@ -27,4 +27,14 @@ import userRouter from "./routes/user.routes.js";
 
 app.use("/api/v1/users", userRouter);
 
+// blog routes
+import blogRouter from "./routes/blog.routes.js";
+
+app.use("/api/v1/blogs", blogRouter);
+
+// meeting routes
+import meetingRoutes from "./routes/meeting.routes.js";
+
+app.use("api/v1/meetings", meetingRoutes);
+
 export default app;
