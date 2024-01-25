@@ -20,8 +20,13 @@ const getBlog = async (req, res) => {
     try {
         const { id } = req.params;
 
-        console.log("from single blog rtoute ");
-        res.send({ id: id });
+        const query = {
+            _id: id,
+        };
+
+        const result = await blogModel.find(query);
+
+        res.send({ result });
     } catch (error) {
         console.log(error);
         res.status(500).json({
