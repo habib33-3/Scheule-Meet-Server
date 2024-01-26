@@ -8,3 +8,4 @@ const router = Router();
 router.post("/createMeeting", createMeeting);
 
 export default router;
+

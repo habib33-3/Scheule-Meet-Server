@@ -21,7 +21,7 @@ const MeetingSchema = new Schema(
         },
 
         time: {
-            type: [String],
+            type: String, //TODO: will replace with array of string
             required: true,
         },
         meetingLink: {
