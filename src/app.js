@@ -10,7 +10,6 @@ app.use(express.json());
 app.use(
     cors({
         origin: [process.env.CLIENT_DEV, process.env.CLIENT_PROD],
-        
     })
 );
 app.use(cookieParser());
@@ -36,5 +35,10 @@ app.use("/api/v1/blogs", blogRouter);
 import meetingRoutes from "./routes/meeting.routes.js";
 
 app.use("/api/v1/meetings", meetingRoutes);
+
+// meeting routes
+import eventRoutes from "./routes/event.routes.js";
+
+app.use("/api/v1/events", eventRoutes);
 
 export default app;
