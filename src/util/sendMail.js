@@ -10,16 +10,15 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-const sendMail = async () => {
+const sendMail = async (receiver, title) => {
     try {
         const mailOptions = {
             from: {
                 name: "Schedule Meet",
                 address: process.env.MAIL_USER,
             },
-            to: "habib.swi16@gmail.com", // list of receivers
-            subject: "Hello ✔", // Subject line
-            text: "Hello world?", // plain text body
+            to: receiver, // list of receivers
+            subject: title, // Subject line
             html: "<b>Hello world?</b>", // html body
         };
 
