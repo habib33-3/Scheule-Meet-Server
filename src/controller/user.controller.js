@@ -73,6 +73,7 @@ const createToken = async (req, res) => {
     }
 };
 
+// logout function
 const logOut = async (req, res) => {
     try {
         res.clearCookie("token");
