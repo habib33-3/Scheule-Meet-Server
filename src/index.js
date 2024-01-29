@@ -7,6 +7,8 @@ const envVariables = [
     "ACCESS_TOKEN",
     "CLIENT_DEV",
     "CLIENT_PROD",
+    "MAIL_USER",
+    "MAIL_PASS",
 ];
 
 envVariables.forEach((envVar) => {
