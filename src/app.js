@@ -10,6 +10,7 @@ app.use(express.json());
 app.use(
     cors({
         origin: [process.env.CLIENT_DEV, process.env.CLIENT_PROD],
+        // credentials: true,
     })
 );
 app.use(cookieParser());
