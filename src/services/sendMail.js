@@ -1,6 +1,6 @@
-import transporter from "../config/nodemailer.config";
+import transporter from "../config/nodemailer.config.js";
 
-const sendMail = async (receiver, title) => {
+const sendMail = async (receiver, title, mailBody) => {
     try {
         const mailOptions = {
             from: {
@@ -9,14 +9,16 @@ const sendMail = async (receiver, title) => {
             },
             to: receiver, // list of receivers
             subject: title, // Subject line
-            html: "<b>Hello world?</b>", // html body
+            html: mailBody, // html body
         };
 
         const info = await transporter.sendMail(mailOptions);
 
         console.log("Message sent: %s", info.messageId);
+        return true;
     } catch (error) {
         console.log("error during mail send", error);
+        return false;
     }
 };
 
