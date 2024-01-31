@@ -42,4 +42,9 @@ import eventRoutes from "./routes/event.routes.js";
 
 app.use("/api/v1/events", eventRoutes);
 
+// service routes
+import serviceRoutes from "./routes/service.routes.js";
+
+app.use("api/v1/services", serviceRoutes);
+
 export default app;

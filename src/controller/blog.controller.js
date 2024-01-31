@@ -42,9 +42,16 @@ const addBlog = async (req, res) => {
 
         await blogModel.create(blog);
 
-        return res.status(200).json({ message: "blog created", success: true });
+        return res.status(200).json({
+            message: "blog created",
+            success: true,
+        });
     } catch (error) {
         console.log(error);
+        return res.status(500).json({
+            message: "Server Error during posting blogs to db",
+            success: false,
+        });
     }
 };
 
