@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
     createMeeting,
     deleteMeeting,
+    updateMeeting,
 } from "../controller/meeting.controller.js";
 
 const router = Router();
@@ -10,6 +11,9 @@ const router = Router();
 router.post("/createMeeting", createMeeting); //TODO: private route
 
 // route for delete meeting
-router.delete("/deleteMeeting", deleteMeeting); //TODO: verify token will be added
+router.delete("/deleteMeeting/:id", deleteMeeting); //TODO: verify token will be added
+
+// route for update meeting
+router.put("/updateMeeting/:id", updateMeeting); //TODO: verify token will be added
 
 export default router;

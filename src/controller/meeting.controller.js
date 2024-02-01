@@ -30,12 +30,44 @@ const deleteMeeting = async (req, res) => {
             success: true,
         });
     } catch (error) {
-        console.log("error during meeting delete".error);
-        res.status(500).json({
+        console.error("error during meeting delete".error);
+        return res.status(500).json({
             message: "Error during meeting delete",
             success: false,
         });
     }
 };
 
-export { createMeeting, deleteMeeting };
+const updateMeeting = async (req, res) => {
+    try {
+        const { meetingTitle, date, meetingLink } = req.body;
+
+        const { id } = req.query;
+
+        const updateMeeting = await Meeting.findByIdAndUpdate(
+            id,
+            {
+                meetingTitle,
+                date,
+                meetingLink,
+            },
+            {
+                new: true,
+            }
+        );
+
+        return res.status(200).json({
+            message: "Meeting deleted successfully",
+            success: true,
+            meeting: updateMeeting,
+        });
+    } catch (error) {
+        console.error("error during meeting update");
+        return res.status(500).json({
+            message: "Error during meeting delete",
+            success: false,
+        });
+    }
+};
+
+export { createMeeting, deleteMeeting, updateMeeting };
