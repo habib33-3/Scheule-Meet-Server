@@ -8,10 +8,9 @@ const app = express();
 
 app.use(express.json());
 app.use(
-    cors({
-        origin: [process.env.CLIENT_DEV, process.env.CLIENT_PROD],
-    })
-);
+    cors(
+        { origin: [process.env.CLIENT_DEV, process.env.CLIENT_PROD],})
+ );
 app.use(cookieParser());
 app.use(morgan("dev"));
 
@@ -22,9 +21,9 @@ app.get("/", (req, res) => {
 // import routers
 
 // user routes
-import userRouter from "./routes/user.routes.js";
+// import userRouter from "./routes/user.routes.js";
 
-app.use("/api/v1/users", userRouter);
+// app.use("/api/v1/users", userRouter);
 
 // blog routes
 import blogRouter from "./routes/blog.routes.js";
@@ -40,5 +39,8 @@ app.use("/api/v1/meetings", meetingRoutes);
 import eventRoutes from "./routes/event.routes.js";
 
 app.use("/api/v1/events", eventRoutes);
+
+// post data
+
 
 export default app;
