@@ -1,9 +1,12 @@
 import transporter from "../config/nodemailer.config.js";
 
-const receiveMail = async (senderEmail, title, mailBody) => {
+const receiveMail = async (senderEmail, name, title, mailBody) => {
     try {
         const mailOptions = {
-            from: senderEmail,
+            from: {
+                name: name,
+                address: senderEmail,
+            },
             to: process.env.MAIL_USER,
             subject: title,
             html: mailBody,
