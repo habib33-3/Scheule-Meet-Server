@@ -19,4 +19,23 @@ const createMeeting = async (req, res) => {
     }
 };
 
-export { createMeeting };
+const deleteMeeting = async (req, res) => {
+    try {
+        const { id } = req.query;
+
+        await Meeting.findByIdAndDelete(id);
+
+        return res.status(200).json({
+            message: "Meeting deleted successfully",
+            success: true,
+        });
+    } catch (error) {
+        console.log("error during meeting delete".error);
+        res.status(500).json({
+            message: "Error during meeting delete",
+            success: false,
+        });
+    }
+};
+
+export { createMeeting, deleteMeeting };
