@@ -1,5 +1,6 @@
 import { Meeting } from "../models/meeting.model.js";
 
+// post api operation
 const createMeeting = async (req, res) => {
     try {
         const meeting = req.body;
@@ -19,6 +20,27 @@ const createMeeting = async (req, res) => {
     }
 };
 
+// get api operation
+const getMeeting = async (req, res) => {
+    try {
+        const meetings = await Meeting.find();
+        return res.status(200).json({
+            message: "Meeting data loaded successfully",
+            success: true,
+            meetings
+        });
+
+    } catch (error) {
+        console.error("Error during meeting data loading", error);
+        res.status(500).json({
+            message: "Error during meeting data loading",
+            success: false,
+        });
+    }
+}
+
+
+// delete api operation
 const deleteMeeting = async (req, res) => {
     try {
         const { id } = req.query;
@@ -38,6 +60,7 @@ const deleteMeeting = async (req, res) => {
     }
 };
 
+// update api operation
 const updateMeeting = async (req, res) => {
     try {
         const { meetingTitle, date, meetingLink } = req.body;
@@ -70,4 +93,5 @@ const updateMeeting = async (req, res) => {
     }
 };
 
-export { createMeeting, deleteMeeting, updateMeeting };
+export { createMeeting, getMeeting, deleteMeeting, updateMeeting };
+

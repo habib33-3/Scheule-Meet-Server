@@ -10,6 +10,7 @@ app.use(express.json());
 app.use(
     cors({
         origin: [process.env.CLIENT_DEV, process.env.CLIENT_PROD],
+        credentials: true
         // credentials: true,
     })
 );
@@ -39,6 +40,8 @@ app.use("/api/v1/meetings", meetingRoutes);
 
 // meeting routes
 import eventRoutes from "./routes/event.routes.js";
+
+app.use("api/v1/events", eventRoutes)
 
 app.use("/api/v1/events", eventRoutes);
 
