@@ -11,6 +11,7 @@ app.use(
     cors({
         origin: [process.env.CLIENT_DEV, process.env.CLIENT_PROD],
         credentials: true
+        // credentials: true,
     })
 );
 app.use(cookieParser());
@@ -43,5 +44,10 @@ import eventRoutes from "./routes/event.routes.js";
 app.use("api/v1/events", eventRoutes)
 
 app.use("/api/v1/events", eventRoutes);
+
+// service routes
+import serviceRoutes from "./routes/service.routes.js";
+
+app.use("/api/v1/services", serviceRoutes);
 
 export default app;

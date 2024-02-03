@@ -94,3 +94,4 @@ const updateMeeting = async (req, res) => {
 };
 
 export { createMeeting, getMeeting, deleteMeeting, updateMeeting };
+

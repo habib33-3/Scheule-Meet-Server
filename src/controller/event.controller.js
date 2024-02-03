@@ -94,3 +94,4 @@ const updateEvent = async (req, res) => {
 };
 
 export { createEvent, getEvent, deleteEvent, updateEvent };
+
