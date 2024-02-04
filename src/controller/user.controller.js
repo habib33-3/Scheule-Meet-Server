@@ -6,9 +6,9 @@ const saveUserToDb = async (req, res) => {
     try {
         const user = req.body;
 
-        if (!user || !user.email || !user.name || !user.img) {
+        if (!user.email) {
             return res.status(400).json({
-                message: " Please provide a valid email, name, and img.",
+                message: " Please provide a valid email",
                 success: false,
             });
         }
@@ -16,9 +16,9 @@ const saveUserToDb = async (req, res) => {
         const isExists = await User.findOne({ email: user.email });
 
         if (isExists) {
-            return res.status(400).json({
+            return res.json({
                 message: "User already exists",
-                success: false,
+                success: true,
             });
         }
 
