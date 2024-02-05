@@ -7,12 +7,11 @@ import {
 
 const router = Router();
 
-
 // route for save user on db
 router.post("/saveUser", saveUserToDb);
 
 // create token after registration
-router.post("createToken", createToken);
+router.post("/createToken", createToken);
 
 // logout route
 router.post("/logout", logOut);

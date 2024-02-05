@@ -42,28 +42,25 @@ const createToken = async (req, res) => {
     try {
         const user = req.body;
 
-        if (!user?.email) {
-            return res.status(400).json({
-                message: "Please provide email",
-                success: false,
-            });
-        }
+        console.log(user, process.env.ACCESS_TOKEN);
 
         const token = jwt.sign(user, process.env.ACCESS_TOKEN, {
-            expiresIn: "24h",
+            expiresIn: "10d",
         });
-        return res
-            .cookie("token", token, {
-                httpOnly: true,
-                secure: process.env.NODE_ENV === "production",
-                sameSite:
-                    process.env.NODE_ENV === "production" ? "none" : "strict",
-            })
+
+        console.log(token);
+
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+            expires: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000), // expires in 10 days
+        })
+            .status(200)
             .send({
-                message: "token created in cookies",
+                message: "Token created and stored in cookies",
                 success: true,
-            })
-            .status(200);
+            });
     } catch (error) {
         console.error("Server Error during creating token", error);
         return res.status(500).json({
