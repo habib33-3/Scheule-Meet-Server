@@ -19,4 +19,25 @@ const addReport = async (req, res) => {
     }
 };
 
-export { addReport };
+const deleteReport = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const query = { _id: id.id };
+
+        await Report.deleteOne(query);
+
+        res.status(200).json({
+            message: "Report deleted",
+            success: true,
+        });
+    } catch (error) {
+        console.error("Server error during delete report", error);
+        res.status(500).json({
+            message: "Server error during delete report",
+            success: false,
+        });
+    }
+};
+
+export { addReport, deleteReport };

@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { addReport } from "../controller/reports.controller";
+import { addReport, deleteReport } from "../controller/reports.controller";
 
-const router=Router()
-
+const router = Router();
 
 // route for add report
-router.post("/addReport",addReport)
+router.post("/addReport", addReport);
 
-
-export default Router
+// route for delete report
+router.delete("/deleteReport/:id", deleteReport);
+export default Router;

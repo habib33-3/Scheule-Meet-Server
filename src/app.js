@@ -5,6 +5,7 @@ import morgan from "morgan";
 import "dotenv/config";
 
 const app = express();
+
 app.use(cookieParser());
 app.use(express.json());
 app.use(
