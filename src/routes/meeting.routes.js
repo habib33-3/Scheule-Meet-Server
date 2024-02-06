@@ -15,7 +15,7 @@ router.delete("/deleteMeeting/:id", deleteMeeting); //TODO: verify token will be
 router.put("/updateMeeting/:id", updateMeeting); //TODO: verify token will be added
 
 // route for get meeting data
-router.get("/getMeetings", getMeeting);
+router.get("/getMeetings", getMeeting); //TODO: verify token will be added
 
 // route for delete meeting
 router.delete("/deleteMeeting/:id", deleteMeeting); //TODO: verify token will be added
