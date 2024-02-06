@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
     createToken,
+    getUser,
     logOut,
     saveUserToDb,
     updateUser,
@@ -13,6 +14,9 @@ router.post("/saveUser", saveUserToDb);
 
 // route for update user info
 router.put("/update/:id", updateUser);
+
+// router for get single user
+router.get("getUser/:id", getUser);
 
 // create token after registration
 router.post("/createToken", createToken);
