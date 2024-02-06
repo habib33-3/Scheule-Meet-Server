@@ -42,13 +42,9 @@ const createToken = async (req, res) => {
     try {
         const user = req.body;
 
-        console.log(user, process.env.ACCESS_TOKEN);
-
         const token = jwt.sign(user, process.env.ACCESS_TOKEN, {
             expiresIn: "10d",
         });
-
-        console.log(token);
 
         res.cookie("token", token, {
             httpOnly: true,

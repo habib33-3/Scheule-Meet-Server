@@ -27,9 +27,8 @@ const getMeeting = async (req, res) => {
         return res.status(200).json({
             message: "Meeting data loaded successfully",
             success: true,
-            meetings
+            meetings,
         });
-
     } catch (error) {
         console.error("Error during meeting data loading", error);
         res.status(500).json({
@@ -37,15 +36,18 @@ const getMeeting = async (req, res) => {
             success: false,
         });
     }
-}
-
+};
 
 // delete api operation
 const deleteMeeting = async (req, res) => {
     try {
-        const { id } = req.query;
+        const { id } = req.params;
 
-        await Meeting.findByIdAndDelete(id);
+        const query = {
+            _id: id.id,
+        };
+
+        await Meeting.deleteOne(query);
 
         return res.status(200).json({
             message: "Meeting deleted successfully",
@@ -65,19 +67,21 @@ const updateMeeting = async (req, res) => {
     try {
         const { meetingTitle, date, meetingLink } = req.body;
 
-        const { id } = req.query;
+        const { id } = req.params;
 
-        const updateMeeting = await Meeting.findByIdAndUpdate(
-            id,
-            {
+        const query = {
+            _id: id.id,
+        };
+
+        const updatedInfo = {
+            $set: {
                 meetingTitle,
                 date,
                 meetingLink,
             },
-            {
-                new: true,
-            }
-        );
+        };
+
+        await Meeting.findByIdAndUpdate(query, updatedInfo, { new: true });
 
         return res.status(200).json({
             message: "Meeting deleted successfully",
@@ -94,4 +98,3 @@ const updateMeeting = async (req, res) => {
 };
 
 export { createMeeting, getMeeting, deleteMeeting, updateMeeting };
-
