@@ -49,4 +49,9 @@ import serviceRoutes from "./routes/service.routes.js";
 
 app.use("/api/v1/services", serviceRoutes);
 
+// admin routes
+import adminRoutes from "./routes/admin.routes.js";
+
+app.use("/api/v1/admin", adminRoutes);
+
 export default app;
