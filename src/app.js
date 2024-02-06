@@ -54,4 +54,8 @@ import adminRoutes from "./routes/admin.routes.js";
 
 app.use("/api/v1/admin", adminRoutes);
 
+// ban routes
+import banRoutes from "./routes/bannedUser.routes";
+
+app.use("/api/v1/ban", banRoutes);
 export default app;

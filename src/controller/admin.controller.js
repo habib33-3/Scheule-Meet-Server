@@ -2,7 +2,11 @@ import { User } from "../models/user.model.js";
 
 const getAllUsers = async (req, res) => {
     try {
-        const users = await User.find();
+        const query = {
+            banned: false,
+        };
+
+        const users = await User.find(query);
 
         return res.status(200).json({
             message: "User fetched",
