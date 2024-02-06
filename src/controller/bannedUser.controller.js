@@ -1,13 +1,13 @@
-import { BannedUsers } from "../models/bannedUser.model";
-import { User } from "../models/user.model";
+import { BannedUsers } from "../models/bannedUser.model.js";
+import { User } from "../models/user.model.js";
 
 const banUser = async (req, res) => {
     try {
         const banInfo = req.body;
 
-        const query = { _id: banInfo.userId.id };
-
         await BannedUsers.create(banInfo);
+
+        const query = { _id: banInfo.userId.id };
 
         await User.findOneAndUpdate(
             query,
@@ -41,6 +41,18 @@ const unBanUser = async (req, res) => {
         const { id } = req.params;
 
         const query = { _id: id.id };
+
+        await User.findOneAndUpdate(
+            query,
+            {
+                $set: {
+                    banned: false,
+                },
+            },
+            {
+                new: true,
+            }
+        );
 
         await BannedUsers.deleteOne(query);
 

@@ -3,7 +3,16 @@ import { User } from "../models/user.model.js";
 const getAllUsers = async (req, res) => {
     try {
         const query = {
-            banned: false,
+            $or: [
+                {
+                    banned: false,
+                },
+                {
+                    banned: {
+                        $exists: false,
+                    },
+                },
+            ],
         };
 
         const users = await User.find(query);

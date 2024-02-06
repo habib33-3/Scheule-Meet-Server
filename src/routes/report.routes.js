@@ -4,7 +4,7 @@ import {
     deleteReport,
     getReport,
     getReports,
-} from "../controller/reports.controller";
+} from "../controller/reports.controller.js";
 
 const router = Router();
 

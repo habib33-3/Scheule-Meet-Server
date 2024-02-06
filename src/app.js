@@ -56,12 +56,12 @@ import adminRoutes from "./routes/admin.routes.js";
 app.use("/api/v1/admin", adminRoutes);
 
 // ban routes
-import banRoutes from "./routes/bannedUser.routes";
+import banRoutes from "./routes/bannedUser.routes.js";
 
 app.use("/api/v1/ban", banRoutes);
 
 // report routes
-import reportRoutes from "./routes/report.routes";
+import reportRoutes from "./routes/report.routes.js";
 
 app.use("/api/v1/report", reportRoutes);
 

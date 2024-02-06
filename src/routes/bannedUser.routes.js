@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { banUser, unBanUser } from "../controller/bannedUser.controller";
+import { banUser, unBanUser } from "../controller/bannedUser.controller.js";
 
 const router = Router();
 

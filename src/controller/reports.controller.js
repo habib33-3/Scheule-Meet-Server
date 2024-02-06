@@ -1,4 +1,4 @@
-import { Report } from "../models/reports.model";
+import { Report } from "../models/reports.model.js";
 
 const addReport = async (req, res) => {
     try {
