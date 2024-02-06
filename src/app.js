@@ -58,4 +58,11 @@ app.use("/api/v1/admin", adminRoutes);
 import banRoutes from "./routes/bannedUser.routes";
 
 app.use("/api/v1/ban", banRoutes);
+
+// report routes
+import reportRoutes from "./routes/report.routes";
+
+app.use("/api/v1/report", reportRoutes);
+
+
 export default app;
