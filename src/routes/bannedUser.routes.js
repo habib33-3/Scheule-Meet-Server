@@ -7,6 +7,6 @@ const router = Router();
 router.post("/banUser", banUser); //TODO: verify token and verify admin will be added
 
 // route to unBan user
-router.delete("/unBan/:id", unBanUser);
+router.delete("/unBan/:id", unBanUser); //TODO: verify token and verify admin will be added
 
 export default router;
