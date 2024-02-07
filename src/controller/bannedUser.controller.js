@@ -5,11 +5,22 @@ const banUser = async (req, res) => {
     try {
         const banInfo = req.body;
 
-        await BannedUsers.create(banInfo);
+        const isExists = await BannedUsers.findOne({
+            userEmail: banInfo.userEmail,
+        });
 
-        const query = { _id: banInfo.userId.id };
+        if (isExists) {
+            return res.json({
+                message: "User already exists",
+                success: true,
+            });
+        }
 
-        await User.findOneAndUpdate(
+        const added = await BannedUsers.create(banInfo);
+
+        const query = { _id: banInfo.userId };
+
+        const updated = await User.findOneAndUpdate(
             query,
             {
                 $set: {
@@ -20,6 +31,11 @@ const banUser = async (req, res) => {
                 new: true,
             }
         );
+
+        console.log({
+            added: added,
+            updated: updated,
+        });
 
         //    TODO: mail will be implemented
 
@@ -40,10 +56,14 @@ const unBanUser = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const query = { _id: id.id };
+        const { userId } = req.body;
 
-        await User.findOneAndUpdate(
-            query,
+        const deleteQuery = { _id: id };
+
+        const updateQuery = { _id: userId };
+
+        const data = await User.findOneAndUpdate(
+            updateQuery,
             {
                 $set: {
                     banned: false,
@@ -54,7 +74,9 @@ const unBanUser = async (req, res) => {
             }
         );
 
-        await BannedUsers.deleteOne(query);
+        const data2 = await BannedUsers.deleteOne(deleteQuery);
+
+        console.log(data, data2);
 
         //    TODO: mail will be implemented
 
@@ -71,4 +93,24 @@ const unBanUser = async (req, res) => {
     }
 };
 
-export { banUser, unBanUser };
+const getBanUsers = async (req, res) => {
+    try {
+        const banUsers = await BannedUsers.find();
+        return res.status(200).json({
+            message: "Users fetched",
+            success: true,
+            banUsers,
+        });
+    } catch (error) {
+        console.error(
+            "Server Error during getting all banned users from db",
+            error
+        );
+        res.status(500).json({
+            message: "Server Error during getting all banned users from db",
+            success: false,
+        });
+    }
+};
+
+export { banUser, unBanUser, getBanUsers };
