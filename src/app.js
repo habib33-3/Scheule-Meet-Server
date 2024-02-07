@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import "dotenv/config";
 
+
 const app = express();
 
 app.use(express.json());
@@ -36,5 +37,12 @@ app.use("/api/v1/blogs", blogRouter);
 import meetingRoutes from "./routes/meeting.routes.js";
 
 app.use("api/v1/meetings", meetingRoutes);
+
+
+// ....update routes
+import userUpdatedRouter from "./routes/user.update.routes.js";
+app.use("/updateuser", userUpdatedRouter)
+
+
 
 export default app;
