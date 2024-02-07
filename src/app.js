@@ -6,7 +6,7 @@ import "dotenv/config";
 
 
 const app = express();
-
+app.use(cookieParser());
 app.use(express.json());
 app.use(
     cors({
@@ -14,7 +14,7 @@ app.use(
         credentials: true,
     })
 );
-app.use(cookieParser());
+
 app.use(morgan("dev"));
 
 app.get("/", (req, res) => {
@@ -36,7 +36,24 @@ app.use("/api/v1/blogs", blogRouter);
 // meeting routes
 import meetingRoutes from "./routes/meeting.routes.js";
 
-app.use("api/v1/meetings", meetingRoutes);
+app.use("/api/v1/meetings", meetingRoutes);
+
+// meeting routes
+import eventRoutes from "./routes/event.routes.js";
+
+app.use("api/v1/events", eventRoutes);
+
+app.use("/api/v1/events", eventRoutes);
+
+// service routes
+import serviceRoutes from "./routes/service.routes.js";
+
+app.use("/api/v1/services", serviceRoutes);
+
+// admin routes
+import adminRoutes from "./routes/admin.routes.js";
+
+app.use("/api/v1/admin", adminRoutes);
 
 
 // ....update routes

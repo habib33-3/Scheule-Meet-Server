@@ -1,8 +1,8 @@
 import { Schema, model } from "mongoose";
 
-const MeetingSchema = new Schema(
+const EventSchema = new Schema(
     {
-        meetingTitle: {
+        eventTitle: {
             type: String,
             required: true,
         },
@@ -24,7 +24,7 @@ const MeetingSchema = new Schema(
             type: String, //TODO: will replace with array of string
             required: true,
         },
-        meetingLink: {
+        eventLink: {
             type: String,
             required: true,
         },
@@ -34,4 +34,4 @@ const MeetingSchema = new Schema(
     }
 );
 
-export const Meeting = model("meetings", MeetingSchema);
+export const Event = model("events", EventSchema);

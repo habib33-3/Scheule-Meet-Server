@@ -6,9 +6,9 @@ const saveUserToDb = async (req, res) => {
     try {
         const user = req.body;
 
-        if (!user || !user.email || !user.name || !user.img) {
+        if (!user.email) {
             return res.status(400).json({
-                message: " Please provide a valid email, name, and img.",
+                message: " Please provide a valid email",
                 success: false,
             });
         }
@@ -16,9 +16,9 @@ const saveUserToDb = async (req, res) => {
         const isExists = await User.findOne({ email: user.email });
 
         if (isExists) {
-            return res.status(400).json({
+            return res.json({
                 message: "User already exists",
-                success: false,
+                success: true,
             });
         }
 
@@ -42,28 +42,21 @@ const createToken = async (req, res) => {
     try {
         const user = req.body;
 
-        if (!user?.email) {
-            return res.status(400).json({
-                message: "Please provide email",
-                success: false,
-            });
-        }
-
         const token = jwt.sign(user, process.env.ACCESS_TOKEN, {
-            expiresIn: "24h",
+            expiresIn: "10d",
         });
-        return res
-            .cookie("token", token, {
-                httpOnly: true,
-                secure: process.env.NODE_ENV === "production",
-                sameSite:
-                    process.env.NODE_ENV === "production" ? "none" : "strict",
-            })
+
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+            expires: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000), // expires in 10 days
+        })
+            .status(200)
             .send({
-                message: "token created in cookies",
+                message: "Token created and stored in cookies",
                 success: true,
-            })
-            .status(200);
+            });
     } catch (error) {
         console.error("Server Error during creating token", error);
         return res.status(500).json({
@@ -73,6 +66,7 @@ const createToken = async (req, res) => {
     }
 };
 
+// logout function
 const logOut = async (req, res) => {
     try {
         res.clearCookie("token");

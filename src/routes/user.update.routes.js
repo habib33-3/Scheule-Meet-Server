@@ -6,7 +6,7 @@ import { allUsersData } from "../controller/userAllData.controller.js";
 const userUpdatedRouter = Router();
 
 // route for save user on db
-userUpdatedRouter.post("/updatecreate", userUpdateds);
+userUpdatedRouter.put("/updatecreate", userUpdateds);
 userUpdatedRouter.get("/alluser", allUsersData);
 
 

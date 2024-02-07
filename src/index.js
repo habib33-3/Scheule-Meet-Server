@@ -1,5 +1,5 @@
-import { connectDB } from "./db/db.js";
 import "dotenv/config";
+import { connectDB } from "./config/db.config.js";
 
 const envVariables = [
     "DB_USER",
@@ -7,6 +7,8 @@ const envVariables = [
     "ACCESS_TOKEN",
     "CLIENT_DEV",
     "CLIENT_PROD",
+    "MAIL_USER",
+    "MAIL_PASS",
 ];
 
 
