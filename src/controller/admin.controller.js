@@ -77,7 +77,7 @@ const checkAdmin = async (req, res) => {
                 admin: true,
             });
         } else {
-            return res.status(401).json({
+            return res.status(200).json({
                 message: "User is not an admin",
                 success: true,
                 admin: false,
