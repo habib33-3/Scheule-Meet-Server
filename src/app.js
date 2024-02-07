@@ -41,7 +41,7 @@ app.use("/api/v1/meetings", meetingRoutes);
 // meeting routes
 import eventRoutes from "./routes/event.routes.js";
 
-app.use("api/v1/events", eventRoutes);
+
 
 app.use("/api/v1/events", eventRoutes);
 
