@@ -112,4 +112,24 @@ const logOut = async (req, res) => {
     }
 };
 
-export { saveUserToDb, updateUser, createToken, logOut };
+const getUser = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const user = User.findById(id);
+
+        res.status(200).json({
+            message: "User fetched successfully",
+            success: true,
+            user,
+        });
+    } catch (error) {
+        console.error("Server Error during get single user", error);
+        return res.status(500).json({
+            message: "Server Error during get single user",
+            success: false,
+        });
+    }
+};
+
+export { saveUserToDb, updateUser, createToken, logOut, getUser };

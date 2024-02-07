@@ -2,7 +2,20 @@ import { User } from "../models/user.model.js";
 
 const getAllUsers = async (req, res) => {
     try {
-        const users = await User.find();
+        const query = {
+            $or: [
+                {
+                    banned: false,
+                },
+                {
+                    banned: {
+                        $exists: false,
+                    },
+                },
+            ],
+        };
+
+        const users = await User.find(query);
 
         return res.status(200).json({
             message: "User fetched",
@@ -64,7 +77,7 @@ const checkAdmin = async (req, res) => {
                 admin: true,
             });
         } else {
-            return res.status(401).json({
+            return res.status(200).json({
                 message: "User is not an admin",
                 success: true,
                 admin: false,

@@ -7,7 +7,7 @@ const verifyAdmin = async (req, res, next) => {
         const user = await User.findOne({ email });
 
         const isAdmin = user?.role === "admin";
-
+        console.log(email, isAdmin);
         if (!isAdmin) {
             return res.status(401).json({
                 message: "forbidden, not an admin",

@@ -4,6 +4,7 @@ const UserSchema = new Schema(
     {
         name: {
             type: String,
+            default: "",
         },
         email: {
             type: String,
@@ -11,10 +12,15 @@ const UserSchema = new Schema(
         },
         img: {
             type: String,
+            default: "",
         },
         role: {
             type: String,
             default: "user",
+        },
+        banned: {
+            type: Boolean,
+            default: false,
         },
     },
     {

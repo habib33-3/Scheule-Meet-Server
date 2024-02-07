@@ -5,6 +5,7 @@ import morgan from "morgan";
 import "dotenv/config";
 
 const app = express();
+
 app.use(cookieParser());
 app.use(express.json());
 app.use(
@@ -53,5 +54,16 @@ app.use("/api/v1/services", serviceRoutes);
 import adminRoutes from "./routes/admin.routes.js";
 
 app.use("/api/v1/admin", adminRoutes);
+
+// ban routes
+import banRoutes from "./routes/bannedUser.routes.js";
+
+app.use("/api/v1/ban", banRoutes);
+
+// report routes
+import reportRoutes from "./routes/report.routes.js";
+
+app.use("/api/v1/report", reportRoutes);
+
 
 export default app;
