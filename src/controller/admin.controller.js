@@ -84,7 +84,7 @@ const checkAdmin = async (req, res) => {
             });
         }
     } catch (error) {
-        console.log("Server error during check admin", error);
+        console.log("Server error during check admin", error.message);
         return res.status(500).json({
             message: "Server error during check admin",
             success: false,

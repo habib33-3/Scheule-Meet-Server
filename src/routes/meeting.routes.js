@@ -1,7 +1,11 @@
 import { Router } from "express";
-import { createMeeting, getMeeting, deleteMeeting,
-    updateMeeting, } from "../controller/meeting.controller.js";
-
+import {
+    createMeeting,
+    getMeetings,
+    getMeeting,
+    deleteMeeting,
+    updateMeeting,
+} from "../controller/meeting.controller.js";
 
 const router = Router();
 
@@ -15,7 +19,10 @@ router.delete("/deleteMeeting/:id", deleteMeeting); //TODO: verify token will be
 router.put("/updateMeeting/:id", updateMeeting); //TODO: verify token will be added
 
 // route for get meeting data
-router.get("/getMeetings", getMeeting); //TODO: verify token will be added
+router.get("/getMeetings", getMeetings); //TODO: verify token will be added
+
+// route for get single meeting data
+router.get("/getMeetings/:id", getMeeting); //TODO: verify token will be added
 
 // route for delete meeting
 router.delete("/deleteMeeting/:id", deleteMeeting); //TODO: verify token will be added
