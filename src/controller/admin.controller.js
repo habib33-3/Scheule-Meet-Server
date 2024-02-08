@@ -66,8 +66,6 @@ const checkAdmin = async (req, res) => {
     try {
         const { email } = req.params;
 
-        console.log(email);
-
         const user = await User.findOne({ email: email });
 
         if (user?.role === "admin") {
