@@ -1,4 +1,6 @@
+import { BannedUsers } from "../models/bannedUser.model.js";
 import { Report } from "../models/reports.model.js";
+import { User } from "../models/user.model.js";
 
 const addReport = async (req, res) => {
     try {
@@ -23,14 +25,16 @@ const deleteReport = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const query = { _id: id.id };
+        const query = { _id: id };
 
-        await Report.deleteOne(query);
+        const result = await Report.deleteOne(query);
 
-        res.status(200).json({
-            message: "Report deleted",
-            success: true,
-        });
+        if (result.deletedCount) {
+            return res.status(200).json({
+                message: "Report deleted",
+                success: true,
+            });
+        }
     } catch (error) {
         console.error("Server error during delete report", error);
         res.status(500).json({
@@ -44,7 +48,7 @@ const getReports = async (req, res) => {
     try {
         const reports = await Report.find();
 
-        res.status(200).json({
+        return res.status(200).json({
             message: "Reports fetched",
             success: true,
             reports,
@@ -78,4 +82,51 @@ const getReport = async (req, res) => {
     }
 };
 
-export { addReport, deleteReport, getReport, getReports };
+const acceptReport = async (req, res) => {
+    try {
+        const { userId, reportedTo, bannedBy, reason, bannedFrom } = req.body;
+
+        const query = { _id: userId };
+        const { id } = req.params;
+
+        // update the users banned value to true
+        await User.findOneAndUpdate(
+            query,
+            {
+                $set: {
+                    banned: true,
+                },
+            },
+            {
+                new: true,
+            }
+        );
+
+        const banInfo = {
+            userId: userId,
+            userEmail: reportedTo,
+            bannedBy,
+            reason,
+            bannedFrom,
+        };
+
+        // added the banned user to bannedUsers
+        await BannedUsers.create(banInfo);
+
+        //  delete the accepted report
+        await Report.deleteOne({ _id: id });
+
+        res.status(200).json({
+            message: "Report accepted",
+            success: true,
+        });
+    } catch (error) {
+        console.log("Server error during Accept Report", error);
+        res.status(500).json({
+            message: "Server error during Accept Report",
+            success: false,
+        });
+    }
+};
+
+export { addReport, deleteReport, getReport, getReports, acceptReport };

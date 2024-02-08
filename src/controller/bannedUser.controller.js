@@ -62,7 +62,7 @@ const unBanUser = async (req, res) => {
 
         const updateQuery = { _id: userId };
 
-        const data = await User.findOneAndUpdate(
+        await User.findOneAndUpdate(
             updateQuery,
             {
                 $set: {
@@ -74,9 +74,7 @@ const unBanUser = async (req, res) => {
             }
         );
 
-        const data2 = await BannedUsers.deleteOne(deleteQuery);
-
-        console.log(data, data2);
+        await BannedUsers.deleteOne(deleteQuery);
 
         //    TODO: mail will be implemented
 

@@ -63,7 +63,7 @@ app.use("/api/v1/ban", banRoutes);
 // report routes
 import reportRoutes from "./routes/report.routes.js";
 
-app.use("/api/v1/report", reportRoutes);
+app.use("/api/v1/reports", reportRoutes);
 
 
 export default app;
