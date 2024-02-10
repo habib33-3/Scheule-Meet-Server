@@ -21,7 +21,7 @@ const createMeeting = async (req, res) => {
 };
 
 // get api operation
-const getMeeting = async (req, res) => {
+const getMeetings = async (req, res) => {
     try {
         const meetings = await Meeting.find();
         return res.status(200).json({
@@ -44,19 +44,44 @@ const deleteMeeting = async (req, res) => {
         const { id } = req.params;
 
         const query = {
-            _id: id.id,
+            _id: id,
         };
 
-        await Meeting.deleteOne(query);
+        console.log(query);
 
-        return res.status(200).json({
-            message: "Meeting deleted successfully",
-            success: true,
-        });
+        const data = await Meeting.deleteOne(query);
+        if (data.deletedCount) {
+            console.log(data);
+            return res.status(200).json({
+                message: "Meeting deleted successfully",
+                success: true,
+            });
+        }
     } catch (error) {
         console.error("error during meeting delete".error);
         return res.status(500).json({
             message: "Error during meeting delete",
+            success: false,
+        });
+    }
+};
+
+// get single meeting
+const getMeeting = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const meeting = await Meeting.findById(id);
+        
+        return res.status(200).json({
+            message: "Meeting data loaded successfully",
+            success: true,
+            meeting,
+        });
+    } catch (error) {
+        console.error("Error during single meeting data loading", error);
+        res.status(500).json({
+            message: "Error during single meeting data loading",
             success: false,
         });
     }
@@ -70,7 +95,7 @@ const updateMeeting = async (req, res) => {
         const { id } = req.params;
 
         const query = {
-            _id: id.id,
+            _id: id,
         };
 
         const updatedInfo = {
@@ -97,4 +122,4 @@ const updateMeeting = async (req, res) => {
     }
 };
 
-export { createMeeting, getMeeting, deleteMeeting, updateMeeting };
+export { createMeeting, getMeetings, deleteMeeting, updateMeeting, getMeeting };
