@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 const verifyToken = async (req, res, next) => {
     try {
         const token = req.cookies?.token;
-
+        console.log(req.cookies)
         if (!token) {
             return res.status(401).json({
                 
@@ -11,6 +11,7 @@ const verifyToken = async (req, res, next) => {
                 success: false,
             });
         }
+
 
         jwt.verify(token, process.env.ACCESS_TOKEN, (err, decoded) => {
             if (err) {

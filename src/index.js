@@ -11,7 +11,6 @@ const envVariables = [
     "MAIL_PASS",
 ];
 
-
 envVariables.forEach((envVar) => {
     if (!process.env[envVar]) {
         console.error(
@@ -21,21 +20,7 @@ envVariables.forEach((envVar) => {
     }
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 connectDB().catch((err) => {
     console.error("Error starting express server:", err);
     process.exit(1);
 });
-

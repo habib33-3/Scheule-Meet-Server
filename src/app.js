@@ -4,7 +4,6 @@ import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import "dotenv/config";
 
-
 const app = express();
 app.use(cookieParser());
 app.use(express.json());
@@ -54,12 +53,5 @@ app.use("/api/v1/services", serviceRoutes);
 import adminRoutes from "./routes/admin.routes.js";
 
 app.use("/api/v1/admin", adminRoutes);
-
-
-// ....update routes
-import userUpdatedRouter from "./routes/user.update.routes.js";
-app.use("/updateuser", userUpdatedRouter)
-
-
 
 export default app;
