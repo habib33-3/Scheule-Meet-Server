@@ -14,6 +14,32 @@ const UserSchema = new Schema(
             type: String,
             default: "",
         },
+
+        city: {
+            type: String,
+            default: "",
+        },
+        country: {
+            type: String,
+            default: "",
+        },
+
+        twitter: {
+            type: String,
+            default: "www.x.com",
+        },
+        facebook: {
+            type: String,
+            default: "www.facebook.com",
+        },
+        instagram: {
+            type: String,
+            default: "www.instagram.com",
+        },
+        linkedin: {
+            type: String,
+            default: "www.linkedin.com",
+        },
         role: {
             type: String,
             default: "user",
