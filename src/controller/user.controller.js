@@ -40,22 +40,59 @@ const saveUserToDb = async (req, res) => {
 // update user name and img
 const updateUser = async (req, res) => {
     try {
-        const { name, img } = req.body;
+        const { name, img, city, country } = req.body;
         const { id } = req.params;
-        const query = { _id: id.id };
 
-        const updatedInfo = {
-            $set: {
-                name,
-                img,
+        const updated = await User.findByIdAndUpdate(
+            id,
+            {
+                $set: {
+                    name,
+                    img,
+
+                    city,
+                    country,
+                },
             },
+            {
+                new: true,
+            }
+        );
+
+        if (updated) {
+            return res.status(200).json({
+                message: "User info updated",
+                success: true,
+            });
+        }
+
+        return res.status(400).json({
+            message: "User info updated failed",
+            success: false,
+        });
+    } catch (error) {
+        console.log("Server Error during updating user to db", error);
+        res.status(500).json({
+            message: "Server Error during updating user to db",
+            success: false,
+        });
+    }
+};
+
+const getUserByEmail = async (req, res) => {
+    try {
+        const { email } = req.params;
+
+        const query = {
+            email: email,
         };
 
-        await User.findOneAndUpdate(query, updatedInfo, { new: true });
+        const user = await User.findOne(query);
 
         return res.status(200).json({
-            message: "User info updated",
+            message: "User fetched",
             success: true,
+            user,
         });
     } catch (error) {
         console.log("Server Error during updating user to db", error);
@@ -112,4 +149,31 @@ const logOut = async (req, res) => {
     }
 };
 
-export { saveUserToDb, updateUser, createToken, logOut };
+const getUser = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const user = User.findById(id);
+
+        res.status(200).json({
+            message: "User fetched successfully",
+            success: true,
+            user,
+        });
+    } catch (error) {
+        console.error("Server Error during get single user", error);
+        return res.status(500).json({
+            message: "Server Error during get single user",
+            success: false,
+        });
+    }
+};
+
+export {
+    saveUserToDb,
+    updateUser,
+    createToken,
+    logOut,
+    getUser,
+    getUserByEmail,
+};

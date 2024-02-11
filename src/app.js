@@ -4,8 +4,8 @@ import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import "dotenv/config";
 
-
 const app = express();
+
 app.use(cookieParser());
 app.use(express.json());
 app.use(
@@ -41,7 +41,7 @@ app.use("/api/v1/meetings", meetingRoutes);
 // meeting routes
 import eventRoutes from "./routes/event.routes.js";
 
-app.use("api/v1/events", eventRoutes);
+
 
 app.use("/api/v1/events", eventRoutes);
 
@@ -55,11 +55,15 @@ import adminRoutes from "./routes/admin.routes.js";
 
 app.use("/api/v1/admin", adminRoutes);
 
+// ban routes
+import banRoutes from "./routes/bannedUser.routes.js";
 
-// ....update routes
-import userUpdatedRouter from "./routes/user.update.routes.js";
-app.use("/updateuser", userUpdatedRouter)
+app.use("/api/v1/ban", banRoutes);
 
+// report routes
+import reportRoutes from "./routes/report.routes.js";
+
+app.use("/api/v1/reports", reportRoutes);
 
 
 export default app;

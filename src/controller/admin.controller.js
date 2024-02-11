@@ -2,7 +2,20 @@ import { User } from "../models/user.model.js";
 
 const getAllUsers = async (req, res) => {
     try {
-        const users = await User.find();
+        const query = {
+            $or: [
+                {
+                    banned: false,
+                },
+                {
+                    banned: {
+                        $exists: false,
+                    },
+                },
+            ],
+        };
+
+        const users = await User.find(query);
 
         return res.status(200).json({
             message: "User fetched",
@@ -53,8 +66,6 @@ const checkAdmin = async (req, res) => {
     try {
         const { email } = req.params;
 
-        console.log(email);
-
         const user = await User.findOne({ email: email });
 
         if (user?.role === "admin") {
@@ -64,14 +75,14 @@ const checkAdmin = async (req, res) => {
                 admin: true,
             });
         } else {
-            return res.status(401).json({
+            return res.status(200).json({
                 message: "User is not an admin",
                 success: true,
                 admin: false,
             });
         }
     } catch (error) {
-        console.log("Server error during check admin", error);
+        console.log("Server error during check admin", error.message);
         return res.status(500).json({
             message: "Server error during check admin",
             success: false,
