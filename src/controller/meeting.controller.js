@@ -72,7 +72,7 @@ const getMeeting = async (req, res) => {
         const { id } = req.params;
 
         const meeting = await Meeting.findById(id);
-        
+
         return res.status(200).json({
             message: "Meeting data loaded successfully",
             success: true,
@@ -90,7 +90,7 @@ const getMeeting = async (req, res) => {
 // update api operation
 const updateMeeting = async (req, res) => {
     try {
-        const { meetingTitle, date, meetingLink } = req.body;
+        const { title, date, link } = req.body;
 
         const { id } = req.params;
 
@@ -98,20 +98,30 @@ const updateMeeting = async (req, res) => {
             _id: id,
         };
 
-        const updatedInfo = {
-            $set: {
-                meetingTitle,
-                date,
-                meetingLink,
+        const updated = await Meeting.findByIdAndUpdate(
+            query,
+            {
+                $set: {
+                    title,
+                    date,
+                    link,
+                },
             },
-        };
+            {
+                new: true,
+            }
+        );
 
-        await Meeting.findByIdAndUpdate(query, updatedInfo, { new: true });
+        if (updated) {
+            return res.status(200).json({
+                message: "Meeting update successfully",
+                success: true,
+            });
+        }
 
-        return res.status(200).json({
-            message: "Meeting deleted successfully",
-            success: true,
-            meeting: updateMeeting,
+        return res.status(400).json({
+            message: "Meeting update failed",
+            success: false,
         });
     } catch (error) {
         console.error("error during meeting update");
