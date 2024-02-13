@@ -2,7 +2,7 @@ import { Schema, model } from "mongoose";
 
 const MeetingSchema = new Schema(
     {
-        meetingTitle: {
+        title: {
             type: String,
             required: true,
         },
@@ -24,7 +24,7 @@ const MeetingSchema = new Schema(
             type: String, //TODO: will replace with array of string
             required: true,
         },
-        meetingLink: {
+        link: {
             type: String,
             required: true,
         },
