@@ -27,9 +27,8 @@ const getEvent = async (req, res) => {
         return res.status(200).json({
             message: "Event data loaded successfully",
             success: true,
-            events
+            events,
         });
-
     } catch (error) {
         console.error("Error during event data loading", error);
         res.status(500).json({
@@ -37,8 +36,28 @@ const getEvent = async (req, res) => {
             success: false,
         });
     }
-}
+};
 
+// get single event
+const getSingleEvent = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const event = await Event.findById(id);
+
+        return res.status(200).json({
+            message: "Event data loaded successfully",
+            success: true,
+            event,
+        });
+    } catch (error) {
+        console.error("Error during single event data loading", error);
+        res.status(500).json({
+            message: "Error during single event data loading",
+            success: false,
+        });
+    }
+};
 
 // delete api operation
 const deleteEvent = async (req, res) => {
@@ -63,26 +82,31 @@ const deleteEvent = async (req, res) => {
 // update api operation
 const updateEvent = async (req, res) => {
     try {
-        const { eventTitle, date, eventLink } = req.body;
+        const { title, date, link } = req.body;
 
         const { id } = req.query;
 
         const updateEvent = await Event.findByIdAndUpdate(
             id,
             {
-                eventTitle,
+                title,
                 date,
-                eventLink,
+                link,
             },
             {
                 new: true,
             }
         );
 
-        return res.status(200).json({
-            message: "Event deleted successfully",
-            success: true,
-            event: updateEvent,
+        if (updateEvent) {
+            return res.status(200).json({
+                message: "Event update successfully",
+                success: true,
+            });
+        }
+        return res.status(400).json({
+            message: "Event update failed",
+            success: false,
         });
     } catch (error) {
         console.error("error during event update");
@@ -93,5 +117,4 @@ const updateEvent = async (req, res) => {
     }
 };
 
-export { createEvent, getEvent, deleteEvent, updateEvent };
-
+export { createEvent, getEvent, deleteEvent, updateEvent, getSingleEvent };
