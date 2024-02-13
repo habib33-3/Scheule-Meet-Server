@@ -69,4 +69,9 @@ import interviewRoutes from "./routes/invite.routes.js";
 
 app.use("/api/v1/invites", interviewRoutes);
 
+// ad routes
+import adRoutes from "./routes/advertise.routes.js";
+
+app.use("/api/v1/ad", adRoutes);
+
 export default app;
