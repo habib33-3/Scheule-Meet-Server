@@ -11,7 +11,7 @@ const EventSchema = new Schema(
             type: String,
             required: true,
         },
-        
+
         hostEmail: {
             type: String,
             required: true,
@@ -32,10 +32,16 @@ const EventSchema = new Schema(
             required: true,
         },
 
+        description: {
+            type: Date,
+            required: true,
+        },
+
         time: {
             type: String, //TODO: will replace with array of string
             required: true,
         },
+        
         link: {
             type: String,
             required: true,
