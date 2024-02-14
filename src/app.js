@@ -74,4 +74,9 @@ import adRoutes from "./routes/advertise.routes.js";
 
 app.use("/api/v1/ad", adRoutes);
 
+// testimonial routes
+import testimonialRoutes from "./routes/testimonial.routes.js";
+
+app.use("/api/v1/testimonials", testimonialRoutes);
+
 export default app;
