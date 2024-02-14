@@ -1,4 +1,4 @@
-import { Advertisement } from "../models/advertise.model";
+import { Advertisement } from "../models/advertise.model.js";
 
 const postAdvert = async (req, res) => {
     try {

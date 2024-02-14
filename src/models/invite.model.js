@@ -26,7 +26,7 @@ const InviteSchema = new Schema(
 
         type: String,
         enum: ["accepted", "rejected", "pending"],
-        default: "pending",
+        // default: "pending",
     },
     {
         timestamps: true,
