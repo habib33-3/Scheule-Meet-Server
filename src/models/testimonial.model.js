@@ -1,30 +1,28 @@
 import { Schema, model } from "mongoose";
 
-const MeetingSchema = new Schema(
+const TestimonialSchema = new Schema(
     {
         title: {
             type: String,
             required: true,
         },
-        hostName: {
+        text: {
             type: String,
             required: true,
         },
-        hostEmail: {
-            type: String,
+        rating: {
+            type: Number,
             required: true,
         },
-
         date: {
             type: Date,
+            default: Date.now,
+        },
+        reviewerName: {
+            type: String,
             required: true,
         },
-
-        time: {
-            type: String, //TODO: will replace with array of string
-            required: true,
-        },
-        link: {
+        reviewerImg: {
             type: String,
             required: true,
         },
@@ -34,4 +32,5 @@ const MeetingSchema = new Schema(
     }
 );
 
-export const Meeting = model("meetings", MeetingSchema);
+
+export const Testimonial = model("testimonials", TestimonialSchema);

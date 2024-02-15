@@ -47,8 +47,6 @@ app.use("/api/v1/meetings", meetingRoutes);
 // meeting routes
 import eventRoutes from "./routes/event.routes.js";
 
-
-
 app.use("/api/v1/events", eventRoutes);
 
 // service routes
@@ -73,5 +71,20 @@ import reportRoutes from "./routes/report.routes.js";
 
 app.use("/api/v1/reports", reportRoutes);
 
+// invite routes
+
+import interviewRoutes from "./routes/invite.routes.js";
+
+app.use("/api/v1/invites", interviewRoutes);
+
+// ad routes
+import adRoutes from "./routes/advertise.routes.js";
+
+app.use("/api/v1/ad", adRoutes);
+
+// testimonial routes
+import testimonialRoutes from "./routes/testimonial.routes.js";
+
+app.use("/api/v1/testimonials", testimonialRoutes);
 
 export default app;
