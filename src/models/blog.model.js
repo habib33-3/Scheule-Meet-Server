@@ -1,30 +1,46 @@
 import { Schema, model } from "mongoose";
 
 const blogSchema = new Schema({
-    title: {
+    blogUserName: {
         type: String,
         required: true,
     },
-    titleImg: {
+    blogTitle: {
         type: String,
         required: true,
     },
-    description: {
+    blogMessage: {
         type: String,
         required: true,
     },
-    writer: {
+    blogUserEmail: {
         type: String,
-        required: true,
+        required: true,  
+    }, 
+    blogUserImage: {
+
+          type: String,
+        required: true, 
     },
-    writerImg: {
-        type: String,
-        required: true,
+    blogImage: {
+
+    type: String,
+    required: true, 
+  },
+
+  blogCategorys: {
+
+    type: String,
+    required: true, 
+  },
+
+  blogTime: {
+    months: {type: String, required: true,},
+    seconds: {type: String, required: true,},
+    minutes: {type: String, required: true,},
+    dates: {type: String, required: true,},
     },
-    date: {
-        type: String,
-        required: true,
-    },
+
 });
 
-export const blogModel = model("blogs", blogSchema);
+export const blogModel = model("blog", blogSchema);

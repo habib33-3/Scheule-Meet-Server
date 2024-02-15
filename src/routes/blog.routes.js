@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getBlog, getBlogs, addBlog } from "../controller/blog.controller.js";
+import {addBlog, getBlogs, SingleBlog } from "../controller/blog.controller.js";
 
 const router = Router();
 
@@ -7,7 +7,7 @@ const router = Router();
 router.get("/getblogs", getBlogs);
 
 // route for get single blogs
-router.get("/getblog/:id", getBlog);
+router.get("/getblog/:id", SingleBlog);
 
 // route for add blogs
 router.post("/addBlog", addBlog);
