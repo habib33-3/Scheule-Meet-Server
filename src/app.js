@@ -21,8 +21,11 @@ app.get("/", (req, res) => {
     res.send("server started  ");
 });
 
-// import routers
 
+<<<<<<< HEAD
+
+// import routers
+=======
 // user routes
 import userRouter from "./routes/user.routes.js";
 
@@ -79,4 +82,5 @@ import testimonialRoutes from "./routes/testimonial.routes.js";
 
 app.use("/api/v1/testimonials", testimonialRoutes);
 
+>>>>>>> 5fd5bf297561121cd4b58399442e6555b117d407
 export default app;
