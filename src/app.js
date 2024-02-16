@@ -37,7 +37,7 @@ import meetingRoutes from "./routes/meeting.routes.js";
 
 app.use("/api/v1/meetings", meetingRoutes);
 
-// meeting routes
+// event routes
 import eventRoutes from "./routes/event.routes.js";
 
 app.use("/api/v1/events", eventRoutes);

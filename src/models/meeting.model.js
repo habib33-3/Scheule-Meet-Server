@@ -2,19 +2,14 @@ import { Schema, model } from "mongoose";
 
 const MeetingSchema = new Schema(
     {
-        title: {
+        meetingTitle: {
             type: String,
             required: true,
         },
-        hostName: {
+        description: {
             type: String,
             required: true,
         },
-        hostEmail: {
-            type: String,
-            required: true,
-        },
-
         date: {
             type: Date,
             required: true,
@@ -24,7 +19,11 @@ const MeetingSchema = new Schema(
             type: String, //TODO: will replace with array of string
             required: true,
         },
-        link: {
+        duration: {
+            type: String,
+            required: true,
+        },
+        meetingLink: {
             type: String,
             required: true,
         },
