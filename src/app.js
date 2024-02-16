@@ -3,7 +3,6 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import "dotenv/config";
-
 const app = express();
 
 app.use(cookieParser());
@@ -15,12 +14,19 @@ app.use(
     })
 );
 
+
+
+  
+  
+
+
 app.use(morgan("dev"));
 
 app.get("/", (req, res) => {
     res.send("server started  ");
 });
 
+// import routers
 
 // user routes
 import userRouter from "./routes/user.routes.js";
@@ -81,5 +87,4 @@ import testimonialRoutes from "./routes/testimonial.routes.js";
 
 app.use("/api/v1/testimonials", testimonialRoutes);
 
-// import routers
 export default app;

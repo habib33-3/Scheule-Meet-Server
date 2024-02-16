@@ -17,21 +17,14 @@ res.send([])
 
 
 const addBlog = async (req, res) => {
-const blog = req.body;
-const result = await blogModel.create(blog);
-res.send(result)
+    const blog = req.body;
+    const result = await blogModel.create(blog);
+    res.send(result);
 };
-
 
 const getBlogs = async (req, res) => {
-const result = await blogModel.find();
-res.send(result)
-
-
+    const result = await blogModel.find();
+    res.send(result);
 };
 
-
-
-
-
-export {addBlog, getBlogs, SingleBlog };
+export { addBlog, getBlogs, SingleBlog };
