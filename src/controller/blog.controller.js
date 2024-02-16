@@ -2,10 +2,19 @@ import { blogModel } from "../models/blog.model.js";
 
 //! get specific blog , baed on id ( get single blog )
 const SingleBlog = async (req, res) => {
-    const { id } = req.params;
-    const result = await blogModel.find({ _id: id });
-    res.send(result);
+
+try {
+const { id } = req.params;
+const result = await blogModel.find({_id: id});
+res.send(result)
+} 
+catch (error) {
+console.log(error)
+res.send([])
+}
 };
+
+
 
 const addBlog = async (req, res) => {
     const blog = req.body;
