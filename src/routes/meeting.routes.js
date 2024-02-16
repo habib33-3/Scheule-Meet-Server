@@ -7,8 +7,6 @@ import {
     updateMeeting,
 } from "../controller/meeting.controller.js";
 
-
-
 const router = Router();
 
 // route for create meeting
