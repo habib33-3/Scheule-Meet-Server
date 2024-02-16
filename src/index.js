@@ -1,7 +1,6 @@
 import "dotenv/config";
 import { connectDB } from "./config/db.config.js";
 
-
 const envVariables = [
     "DB_USER",
     "DB_PASS",
@@ -11,17 +10,6 @@ const envVariables = [
     "MAIL_USER",
     "MAIL_PASS",
 ];
-
-
-
-
-// Load the Meet API
-
-
-
-
-
-
 
 envVariables.forEach((envVar) => {
     if (!process.env[envVar]) {

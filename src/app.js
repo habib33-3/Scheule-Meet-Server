@@ -14,12 +14,6 @@ app.use(
     })
 );
 
-
-
-  
-  
-
-
 app.use(morgan("dev"));
 
 app.get("/", (req, res) => {
@@ -40,7 +34,6 @@ app.use("/api/v1/blogs", blogRouter);
 
 // meeting routes
 import meetingRoutes from "./routes/meeting.routes.js";
-
 
 app.use("/api/v1/meetings", meetingRoutes);
 
@@ -66,8 +59,6 @@ app.use("/api/v1/ban", banRoutes);
 
 // report routes
 import reportRoutes from "./routes/report.routes.js";
-
-
 
 app.use("/api/v1/reports", reportRoutes);
 
