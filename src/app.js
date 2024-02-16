@@ -20,6 +20,7 @@ app.get("/", (req, res) => {
     res.send("server started");
 });
 
-// import routers
 
+
+// import routers
 export default app;
