@@ -14,12 +14,12 @@ const InviteSchema = new Schema(
 
         hostName: {
             type: String,
-            required: true,
+            
         },
-        eventType: {
-            type: String,
-            enum: ["event", "meeting"],
-        },
+        // eventType: {
+        //     type: String,
+        //     enum: ["event", "meeting"],
+        // },
         eventId: {
             type: Schema.Types.ObjectId,
             required: true,
