@@ -12,10 +12,9 @@ catch (error) {
 console.log(error)
 res.send([])
 }
-
-
-
 };
+
+
 
 const addBlog = async (req, res) => {
 const blog = req.body;
