@@ -1,60 +1,30 @@
 import { blogModel } from "../models/blog.model.js";
 
-// get all blog data
-const getBlogs = async (req, res) => {
-    try {
-        const result = await blogModel.find();
-
-        res.send({ result });
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({
-            message: "Server Error during getting blogs from db",
-            success: false,
-        });
-    }
-};
-
 //! get specific blog , baed on id ( get single blog )
-const getBlog = async (req, res) => {
-    try {
-        const { id } = req.params;
+const SingleBlog = async (req, res) => {
 
-        const query = {
-            _id: id,
-        };
-
-        const result = await blogModel.find(query);
-
-        res.send({ result });
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({
-            message: "Server Error during getting blogs from db",
-            success: false,
-        });
-    }
+try {
+const { id } = req.params;
+const result = await blogModel.find({_id: id});
+res.send(result)
+} 
+catch (error) {
+console.log(error)
+res.send([])
+}
 };
+
+
 
 const addBlog = async (req, res) => {
-    try {
-        const blog = req.body;
-
-        await blogModel.create(blog);
-
-        return res.status(200).json({
-            message: "blog created",
-            success: true,
-        });
-    } catch (error) {
-        console.log(error);
-        return res.status(500).json({
-            message: "Server Error during posting blogs to db",
-            success: false,
-        });
-    }
+    const blog = req.body;
+    const result = await blogModel.create(blog);
+    res.send(result);
 };
 
+const getBlogs = async (req, res) => {
+    const result = await blogModel.find();
+    res.send(result);
+};
 
-
-export { getBlogs, getBlog, addBlog };
+export { addBlog, getBlogs, SingleBlog };

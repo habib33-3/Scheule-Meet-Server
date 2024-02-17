@@ -7,10 +7,19 @@ const InviteSchema = new Schema(
             required: true,
         },
 
-        eventType: {
+        inviteeEmail: {
             type: String,
-            enums: ["event", "meeting"],
+            required: true,
         },
+
+        hostName: {
+            type: String,
+            
+        },
+        // eventType: {
+        //     type: String,
+        //     enum: ["event", "meeting"],
+        // },
         eventId: {
             type: Schema.Types.ObjectId,
             required: true,
@@ -23,10 +32,11 @@ const InviteSchema = new Schema(
             type: Date,
             required: true,
         },
-
-        type: String,
-        enum: ["accepted", "rejected", "pending"],
-        // default: "pending",
+        status: {
+            type: String,
+            enum: ["accepted", "rejected", "pending"],
+            default: "pending",
+        },
     },
     {
         timestamps: true,

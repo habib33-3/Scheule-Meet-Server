@@ -18,17 +18,17 @@ const inviteUser = async (req, res) => {
             });
         }
 
-        let invitedTo = "";
+        // let invitedTo = "";
 
-        if (inviteInfo.type === "event") {
-            invitedTo = await Event.findById(inviteInfo.eventId);
-        } else {
-            invitedTo = await Meeting.findById(inviteInfo.eventId);
-        }
+        // if (inviteInfo.type === "event") {
+        //     invitedTo = await Event.findById(inviteInfo.eventId);
+        // } else {
+        //     invitedTo = await Meeting.findById(inviteInfo.eventId);
+        // }
 
         const inviteData = {
             ...inviteInfo,
-            eventTitle: invitedTo.title,
+            // eventTitle: invitedTo.title,
         };
 
         await Invite.create(inviteData);

@@ -1,5 +1,3 @@
-// import { Advertisement } from "../models/advertise.model";
-
 import { Advertisement } from "../models/advertise.model.js";
 
 const postAdvert = async (req, res) => {
@@ -13,16 +11,16 @@ const postAdvert = async (req, res) => {
             });
         }
 
-        const { eventId, expiresIn, tag, thumbnail, title } = req.body;
+        const { eventId, tag, thumbnail, title } = req.body;
 
-        const parsedExpiresIn = Date.parse(expiresIn);
+        // const parsedExpiresIn = Date.parse(expiresIn);
 
         const adData = {
             eventId,
             tag,
             thumbnail,
             title,
-            expiresIn: parsedExpiresIn,
+            // expiresIn: parsedExpiresIn,
         };
 
         await Advertisement.create(adData);
