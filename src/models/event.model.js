@@ -2,30 +2,34 @@ import { Schema, model } from "mongoose";
 
 const EventSchema = new Schema(
     {
-        title: {
+        eventTitle: {
             type: String,
             required: true,
         },
 
-        hostName: {
+        // hostName: {
+        //     type: String,
+        //     required: true,
+        // },
+
+        // hostEmail: {
+        //     type: String,
+        //     required: true,
+        // },
+
+        image: {
+            type: String,
+            required: true,
+        },
+        duration: {
             type: String,
             required: true,
         },
 
-        hostEmail: {
-            type: String,
-            required: true,
-        },
-
-        thumbnail: {
-            type: String,
-            required: true,
-        },
-
-        capacity: {
-            type: Number,
-            default: 1000,
-        },
+        // capacity: {
+        //     type: Number,
+        //     default: 1000,
+        // },
 
         date: {
             type: Date,
@@ -33,7 +37,7 @@ const EventSchema = new Schema(
         },
 
         description: {
-            type: Date,
+            type: String,
             required: true,
         },
 
@@ -42,10 +46,10 @@ const EventSchema = new Schema(
             required: true,
         },
         
-        link: {
-            type: String,
-            required: true,
-        },
+        // link: {
+        //     type: String,
+        //     required: true,
+        // },
     },
     {
         timestamps: true,
