@@ -10,7 +10,7 @@ const AdvertiseSchema = new Schema(
         expiresIn: {
             type: Date,
             expires: 0,
-            // required: true,
+            required: true,
         },
         tag: {
             type: String,

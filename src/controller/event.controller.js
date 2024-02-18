@@ -21,9 +21,9 @@ const createEvent = async (req, res) => {
 };
 
 // get api operation
-const getEvent = async (req, res) => {
+const getEvents = async (req, res) => {
     try {
-        const events = await Event.find();
+        const events = await Event.find({ isPublic: true });
         return res.status(200).json({
             message: "Event data loaded successfully",
             success: true,
@@ -33,6 +33,27 @@ const getEvent = async (req, res) => {
         console.error("Error during event data loading", error);
         res.status(500).json({
             message: "Error during event data loading",
+            success: false,
+        });
+    }
+};
+
+// get event by email
+const getEventsByEmail = async (req, res) => {
+    try {
+        const { email } = req.params;
+
+        const events = await Event.find({ hostEmail: email });
+
+        return res.status(200).json({
+            message: "Event data loaded successfully",
+            success: true,
+            events,
+        });
+    } catch (error) {
+        console.error("Error during even by email   loading", error);
+        res.status(500).json({
+            message: "Error during event by email  loading",
             success: false,
         });
     }
@@ -117,4 +138,11 @@ const updateEvent = async (req, res) => {
     }
 };
 
-export { createEvent, getEvent, deleteEvent, updateEvent, getSingleEvent };
+export {
+    createEvent,
+    getEvents,
+    deleteEvent,
+    updateEvent,
+    getSingleEvent,
+    getEventsByEmail,
+};

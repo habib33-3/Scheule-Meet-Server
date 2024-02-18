@@ -2,20 +2,20 @@ import { Schema, model } from "mongoose";
 
 const EventSchema = new Schema(
     {
-        eventTitle: {
+        title: {
             type: String,
             required: true,
         },
 
-        // hostName: {
-        //     type: String,
-        //     required: true,
-        // },
+        hostName: {
+            type: String,
+            required: true,
+        },
 
-        // hostEmail: {
-        //     type: String,
-        //     required: true,
-        // },
+        hostEmail: {
+            type: String,
+            required: true,
+        },
 
         image: {
             type: String,
@@ -26,10 +26,10 @@ const EventSchema = new Schema(
             required: true,
         },
 
-        // capacity: {
-        //     type: Number,
-        //     default: 1000,
-        // },
+        capacity: {
+            type: Number,
+            default: 1000,
+        },
 
         date: {
             type: Date,
@@ -45,11 +45,26 @@ const EventSchema = new Schema(
             type: String, //TODO: will replace with array of string
             required: true,
         },
-        
-        // link: {
-        //     type: String,
-        //     required: true,
-        // },
+
+        link: {
+            type: String,
+            required: true,
+        },
+
+        isPremium: {
+            type: Boolean,
+            default: false,
+        },
+
+        fee: {
+            type: Number,
+            default: 0,
+        },
+
+        isPublic: {
+            type: Boolean,
+            default: false,
+        },
     },
     {
         timestamps: true,

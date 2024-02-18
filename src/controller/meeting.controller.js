@@ -23,7 +23,9 @@ const createMeeting = async (req, res) => {
 // get api operation
 const getMeetings = async (req, res) => {
     try {
-        const meetings = await Meeting.find();
+        const { email } = req.params;
+
+        const meetings = await Meeting.find({ hostEmail: email });
         return res.status(200).json({
             message: "Meeting data loaded successfully",
             success: true,

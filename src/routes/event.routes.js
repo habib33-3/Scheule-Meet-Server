@@ -2,7 +2,8 @@ import { Router } from "express";
 import {
     createEvent,
     deleteEvent,
-    getEvent,
+    getEvents,
+    getEventsByEmail,
     getSingleEvent,
     updateEvent,
 } from "../controller/event.controller.js";
@@ -19,7 +20,10 @@ router.delete("/deleteEvent/:id", deleteEvent); //TODO: verify token will be add
 router.put("/updateEvent/:id", updateEvent); //TODO: verify token will be added
 
 // route for get event data
-router.get("/getEvents", getEvent);
+router.get("/getEvents", getEvents);
+
+// route for get event data by email
+router.get("/events/:email", getEventsByEmail);
 
 // route for get event data
 router.get("/getEvent/:id", getSingleEvent);
