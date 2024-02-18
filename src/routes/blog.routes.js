@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { SingleBlog, getBlogs, addBlog } from "../controller/blog.controller.js";
+import { SingleBlog, getBlogs, addBlog, SingleBlogByEmailName } from "../controller/blog.controller.js";
 
 const router = Router();
 
@@ -11,5 +11,8 @@ router.get("/getblog/:id", SingleBlog);
 
 // route for add blogs
 router.post("/addBlog", addBlog);
+
+// route for get blog by email
+router.get("/getblogbyEmail/:UserEmail", SingleBlogByEmailName)
 
 export default router;
