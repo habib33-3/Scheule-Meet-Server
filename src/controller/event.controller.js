@@ -21,9 +21,9 @@ const createEvent = async (req, res) => {
 };
 
 // get api operation
-const getEvent = async (req, res) => {
+const getEvents = async (req, res) => {
     try {
-        const events = await Event.find();
+        const events = await Event.find({ isPublic: true });
         return res.status(200).json({
             message: "Event data loaded successfully",
             success: true,
@@ -117,4 +117,4 @@ const updateEvent = async (req, res) => {
     }
 };
 
-export { createEvent, getEvent, deleteEvent, updateEvent, getSingleEvent };
+export { createEvent, getEvents, deleteEvent, updateEvent, getSingleEvent };
