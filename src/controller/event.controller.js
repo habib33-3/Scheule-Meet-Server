@@ -38,6 +38,27 @@ const getEvents = async (req, res) => {
     }
 };
 
+// get event by email
+const getEventsByEmail = async (req, res) => {
+    try {
+        const { email } = req.params;
+
+        const events = await Event.find({ hostEmail: email });
+
+        return res.status(200).json({
+            message: "Event data loaded successfully",
+            success: true,
+            events,
+        });
+    } catch (error) {
+        console.error("Error during even by email   loading", error);
+        res.status(500).json({
+            message: "Error during event by email  loading",
+            success: false,
+        });
+    }
+};
+
 // get single event
 const getSingleEvent = async (req, res) => {
     try {
@@ -117,4 +138,11 @@ const updateEvent = async (req, res) => {
     }
 };
 
-export { createEvent, getEvents, deleteEvent, updateEvent, getSingleEvent };
+export {
+    createEvent,
+    getEvents,
+    deleteEvent,
+    updateEvent,
+    getSingleEvent,
+    getEventsByEmail,
+};
