@@ -11,16 +11,22 @@ const postAdvert = async (req, res) => {
             });
         }
 
-        const { eventId, tag, thumbnail, title } = req.body;
+        const { eventId, tag, thumbnail, title, expiresIn } = req.body;
 
-        // const parsedExpiresIn = Date.parse(expiresIn);
+        const currentDate = new Date();
+
+        const lastDate = new Date(currentDate);
+
+        const expireDate = lastDate.setDate(
+            lastDate.getDate() + parseInt(expiresIn)
+        );
 
         const adData = {
             eventId,
             tag,
             thumbnail,
             title,
-            // expiresIn: parsedExpiresIn,
+            expiresIn: expireDate,
         };
 
         await Advertisement.create(adData);
