@@ -71,7 +71,7 @@ app.use("/api/v1/invites", interviewRoutes);
 // ad routes
 import adRoutes from "./routes/advertise.routes.js";
 
-app.use("/api/v1/ad", adRoutes);
+app.use("/api/v1/demos", adRoutes);
 
 // testimonial routes
 import testimonialRoutes from "./routes/testimonial.routes.js";
