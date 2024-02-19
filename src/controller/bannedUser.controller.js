@@ -111,4 +111,28 @@ const getBanUsers = async (req, res) => {
     }
 };
 
+const banPermanent = async (req, res) => {
+    try {
+        const { userId, banId } = req.body;
+
+        const updated = await BannedUsers.findByIdAndUpdate(
+            banId,
+            {
+                $set: {
+                    isPermanent: true,
+                },
+            },
+            { new: true }
+        );
+
+        console.log(updated)
+    } catch (error) {
+        console.log("server error during ban permanently", error);
+        res.status(500).json({
+            message: "server error during ban permanently",
+            success: false,
+        });
+    }
+};
+
 export { banUser, unBanUser, getBanUsers };

@@ -1,4 +1,5 @@
 import { User } from "../models/user.model.js";
+import { BannedUsers } from "../models/bannedUser.model.js";
 import jwt from "jsonwebtoken";
 
 // controller for save user to db
@@ -13,10 +14,21 @@ const saveUserToDb = async (req, res) => {
             });
         }
 
+        const isBanned = await BannedUsers.findOne({ userEmail: user.email });
+
+        console.log(isBanned)
+
+        if (isBanned) {
+            return res.status(400).json({
+                message: "user is banned",
+                success: true,
+            });
+        }
+
         const isExists = await User.findOne({ email: user.email });
 
         if (isExists) {
-            return res.json({
+            return res.status(200).json({
                 message: "User already exists",
                 success: true,
             });
