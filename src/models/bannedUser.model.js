@@ -27,6 +27,11 @@ const BannedUserSchema = new Schema(
             type: Date,
             required: true,
         },
+
+        isPermanent: {
+            type: Boolean,
+            default:false
+        },
     },
     {
         timestamps: true,
