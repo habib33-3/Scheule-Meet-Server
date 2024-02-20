@@ -42,7 +42,7 @@ const EventSchema = new Schema(
         },
 
         time: {
-            type: String, //TODO: will replace with array of string
+            type: String, 
             required: true,
         },
 
