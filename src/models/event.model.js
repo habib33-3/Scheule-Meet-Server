@@ -70,6 +70,11 @@ const EventSchema = new Schema(
             type: Boolean,
             default: false,
         },
+
+        bookedBy: {
+            type: [String],
+            default: [],
+        },
     },
     {
         timestamps: true,
