@@ -42,7 +42,7 @@ const EventSchema = new Schema(
         },
 
         time: {
-            type: String, 
+            type: String,
             required: true,
         },
 
@@ -62,6 +62,11 @@ const EventSchema = new Schema(
         },
 
         isPublic: {
+            type: Boolean,
+            default: true,
+        },
+
+        isAdvertised: {
             type: Boolean,
             default: false,
         },
