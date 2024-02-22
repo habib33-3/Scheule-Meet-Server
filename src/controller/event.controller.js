@@ -172,8 +172,6 @@ const bookEvent = async (req, res) => {
             }
         );
 
-        console.log({updateEvent});
-
         if (!updateEvent) {
             return res.status(500).json({
                 message: "Error during book delete",
@@ -195,8 +193,6 @@ const bookEvent = async (req, res) => {
             "Your Booking has been successful",
             mailBody
         );
-
-        console.log({success})
 
         if (success) {
             return res.status(200).json({
