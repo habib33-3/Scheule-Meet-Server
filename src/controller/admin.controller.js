@@ -18,7 +18,7 @@ const getAllUsers = async (req, res) => {
         const users = await User.find(query);
 
         return res.status(200).json({
-            message: "User fetched",
+            message: "User fetched successfully",
             success: true,
             users,
         });

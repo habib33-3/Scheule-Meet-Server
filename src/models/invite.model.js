@@ -16,10 +16,11 @@ const InviteSchema = new Schema(
             type: String,
             
         },
-        // eventType: {
-        //     type: String,
-        //     enum: ["event", "meeting"],
-        // },
+        eventType: {
+            type: String,
+            enum: ["event", "meeting"],
+        },
+        
         eventId: {
             type: Schema.Types.ObjectId,
             required: true,

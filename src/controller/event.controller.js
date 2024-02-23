@@ -1,4 +1,6 @@
 import { Event } from "../models/event.model.js";
+import sendMail from "../services/sendMail.js";
+import eventBookingConfirmationTemplate from "../templates/eventBookingConfirmation.template.js";
 
 // post api operation
 const createEvent = async (req, res) => {
@@ -21,9 +23,9 @@ const createEvent = async (req, res) => {
 };
 
 // get api operation
-const getEvent = async (req, res) => {
+const getEvents = async (req, res) => {
     try {
-        const events = await Event.find();
+        const events = await Event.find({ isPublic: true });
         return res.status(200).json({
             message: "Event data loaded successfully",
             success: true,
@@ -33,6 +35,27 @@ const getEvent = async (req, res) => {
         console.error("Error during event data loading", error);
         res.status(500).json({
             message: "Error during event data loading",
+            success: false,
+        });
+    }
+};
+
+// get event by email
+const getEventsByEmail = async (req, res) => {
+    try {
+        const { email } = req.params;
+
+        const events = await Event.find({ hostEmail: email });
+
+        return res.status(200).json({
+            message: "Event data loaded successfully",
+            success: true,
+            events,
+        });
+    } catch (error) {
+        console.error("Error during even by email   loading", error);
+        res.status(500).json({
+            message: "Error during event by email  loading",
             success: false,
         });
     }
@@ -82,22 +105,22 @@ const deleteEvent = async (req, res) => {
 // update api operation
 const updateEvent = async (req, res) => {
     try {
-        const { title, date, link } = req.body;
+        const { title, description, isPublic } = req.body;
 
-        const { id } = req.query;
+        const { id } = req.params;
 
         const updateEvent = await Event.findByIdAndUpdate(
             id,
             {
                 title,
-                date,
-                link,
+                description,
+                isPublic,
             },
             {
                 new: true,
             }
         );
-
+console.log(updateEvent)
         if (updateEvent) {
             return res.status(200).json({
                 message: "Event update successfully",
@@ -109,7 +132,7 @@ const updateEvent = async (req, res) => {
             success: false,
         });
     } catch (error) {
-        console.error("error during event update");
+        console.error("error during event update", error);
         return res.status(500).json({
             message: "Error during event delete",
             success: false,
@@ -117,4 +140,81 @@ const updateEvent = async (req, res) => {
     }
 };
 
-export { createEvent, getEvent, deleteEvent, updateEvent, getSingleEvent };
+const bookEvent = async (req, res) => {
+    try {
+        const {
+            _id,
+            guestEmail,
+            hostName,
+            guestName,
+            date,
+            time,
+            link,
+            title,
+        } = req.body;
+
+        const event = await Event.findById(_id);
+
+        if (event.bookedBy.includes(guestEmail)) {
+            return res.status(400).json({
+                message: "Guest already booked for this event",
+                success: false,
+            });
+        }
+
+        const updateEvent = await Event.findByIdAndUpdate(
+            _id,
+            {
+                $addToSet: { bookedBy: guestEmail },
+            },
+            {
+                new: true,
+            }
+        );
+
+        if (!updateEvent) {
+            return res.status(500).json({
+                message: "Error during book delete",
+                success: false,
+            });
+        }
+
+        const mailBody = eventBookingConfirmationTemplate(
+            guestName,
+            hostName,
+            title,
+            link,
+            date,
+            time
+        );
+
+        const success = await sendMail(
+            guestEmail,
+            "Your Booking has been successful",
+            mailBody
+        );
+
+        if (success) {
+            return res.status(200).json({
+                message: "Booking successful",
+                success: true,
+            });
+        }
+    } catch (error) {
+        console.error("error during event update", error);
+        return res.status(500).json({
+            message: "Error during book delete",
+            success: false,
+        });
+    }
+};
+
+export {
+    createEvent,
+    getEvents,
+    deleteEvent,
+    updateEvent,
+    getSingleEvent,
+    getEventsByEmail,
+    bookEvent,
+};

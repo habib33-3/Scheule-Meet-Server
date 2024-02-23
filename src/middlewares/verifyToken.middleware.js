@@ -6,12 +6,13 @@ const verifyToken = async (req, res, next) => {
         const token = req.cookies?.token;
         console.log(req.cookies);
         if (!token) {
+            console.log("toke")
             return res.status(401).json({
                 message: "Unauthorized: token is missing",
                 success: false,
             });
         }
-
+console.log("token",token)
         jwt.verify(token, process.env.ACCESS_TOKEN, async (err, decoded) => {
             if (err) {
                 return res.status(403).json({
