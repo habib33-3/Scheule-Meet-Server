@@ -1,5 +1,9 @@
 import { Router } from "express";
-import { getAds, postAdvert } from "../controller/advertise.controller.js";
+import {
+    checkIfAdvertised,
+    getAds,
+    postAdvert,
+} from "../controller/advertise.controller.js";
 
 const router = Router();
 
@@ -8,5 +12,8 @@ router.post("/post", postAdvert);
 
 // routes for get ads
 router.get("/get", getAds);
+
+// routes to check if advertised
+router.get("/check/:eventId", checkIfAdvertised);
 
 export default router;

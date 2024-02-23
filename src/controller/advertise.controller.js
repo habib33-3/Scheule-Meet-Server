@@ -4,29 +4,29 @@ const postAdvert = async (req, res) => {
     try {
         const adCount = await Advertisement.countDocuments();
 
-        if (adCount >= 5) {
+        if (adCount >= 10) {
             return res.status(400).json({
                 message: "Maximum number of advertisements reached",
                 success: false,
             });
         }
 
-        const { eventId, tag, thumbnail, title } = req.body;
+        const { eventId, tag, thumbnail, title, expiresIn } = req.body;
 
-        // const currentDate = new Date();
+        const currentDate = new Date();
 
-        // const lastDate = new Date(currentDate);
+        const lastDate = new Date(currentDate);
 
-        // const expireDate = lastDate.setDate(
-        //     lastDate.getDate() + parseInt(expiresIn)
-        // );
- 
+        const expireDate = lastDate.setDate(
+            lastDate.getDate() + parseInt(expiresIn)
+        );
+
         const adData = {
             eventId,
             tag,
             thumbnail,
             title,
-            // expiresIn: expireDate,
+            expiresIn: expireDate,
         };
 
         await Advertisement.create(adData);
@@ -62,4 +62,32 @@ const getAds = async (req, res) => {
     }
 };
 
-export { postAdvert, getAds };
+const checkIfAdvertised = async (req, res) => {
+    try {
+        const { eventId } = req.params;
+
+        const ad = await Advertisement.findOne({
+            eventId: eventId,
+        });
+
+        if (ad) {
+            return res.status(200).json({
+                message: "is advertised",
+                isAdvertised: true,
+            });
+        }
+
+        return res.status(200).json({
+            message: "is not advertised",
+            isAdvertised: false,
+        });
+    } catch (error) {
+        console.log("error during check if advertised", error);
+        res.status(500).json({
+            message: "error during check if advertised",
+            success: false,
+        });
+    }
+};
+
+export { postAdvert, getAds, checkIfAdvertised };
