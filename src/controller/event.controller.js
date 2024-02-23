@@ -105,22 +105,22 @@ const deleteEvent = async (req, res) => {
 // update api operation
 const updateEvent = async (req, res) => {
     try {
-        const { title, date, link } = req.body;
+        const { title, description, isPublic } = req.body;
 
-        const { id } = req.query;
+        const { id } = req.params;
 
         const updateEvent = await Event.findByIdAndUpdate(
             id,
             {
                 title,
-                date,
-                link,
+                description,
+                isPublic,
             },
             {
                 new: true,
             }
         );
-
+console.log(updateEvent)
         if (updateEvent) {
             return res.status(200).json({
                 message: "Event update successfully",
