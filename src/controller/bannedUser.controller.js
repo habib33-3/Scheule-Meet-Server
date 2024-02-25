@@ -1,5 +1,6 @@
 import { BannedUsers } from "../models/bannedUser.model.js";
 import { User } from "../models/user.model.js";
+import banUserTemplate from "../templates/banUser.template.js";
 
 const banUser = async (req, res) => {
     try {
@@ -11,7 +12,7 @@ const banUser = async (req, res) => {
 
         if (isExists) {
             return res.json({
-                message: "User already exists",
+                message: "User already banned",
                 success: true,
             });
         }
@@ -31,11 +32,6 @@ const banUser = async (req, res) => {
                 new: true,
             }
         );
-
-        console.log({
-            added: added,
-            updated: updated,
-        });
 
         //    TODO: mail will be implemented
 
@@ -125,7 +121,7 @@ const banPermanent = async (req, res) => {
             { new: true }
         );
 
-        console.log(updated)
+        console.log(updated);
     } catch (error) {
         console.log("server error during ban permanently", error);
         res.status(500).json({
