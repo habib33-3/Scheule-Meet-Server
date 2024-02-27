@@ -64,9 +64,9 @@ app.use("/api/v1/reports", reportRoutes);
 
 // invite routes
 
-import interviewRoutes from "./routes/invite.routes.js";
+import eventInvite from "./routes/eventInvite.routes.js";
 
-app.use("/api/v1/invites", interviewRoutes);
+app.use("/api/v1/invites", eventInvite);
 
 // ad routes
 import adRoutes from "./routes/advertise.routes.js";

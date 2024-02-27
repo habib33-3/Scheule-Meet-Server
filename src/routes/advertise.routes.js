@@ -4,11 +4,12 @@ import {
     getAds,
     postAdvert,
 } from "../controller/advertise.controller.js";
+import verifyToken from "../middlewares/verifyToken.middleware.js";
 
 const router = Router();
 
 // routes for post ad
-router.post("/post", postAdvert);
+router.post("/post", verifyToken, postAdvert);
 
 // routes for get ads
 router.get("/get", getAds);

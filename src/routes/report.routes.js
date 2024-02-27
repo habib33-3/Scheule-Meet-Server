@@ -6,22 +6,24 @@ import {
     getReport,
     getReports,
 } from "../controller/reports.controller.js";
+import verifyToken from "../middlewares/verifyToken.middleware.js";
+import verifyAdmin from "../middlewares/verifyAdmin.middleware.js";
 
 const router = Router();
 
 // route for add report
-router.post("/addReport", addReport); //TODO: verify token will be added
+router.post("/addReport", verifyToken, addReport);
 
 // route for delete report
-router.delete("/deleteReport/:id", deleteReport); //TODO: verify token and verify admin will be added
+router.delete("/deleteReport/:id", verifyToken, verifyAdmin, deleteReport);
 
 // route for accept report
-router.post("/accept/:id", acceptReport); //TODO: verify token and verify admin will be added
+router.post("/accept/:id", verifyToken, verifyAdmin, acceptReport);
 
 // route for get all reports
-router.get("/getReports", getReports); //TODO: verify token and verify admin will be added
+router.get("/getReports", verifyToken, verifyAdmin, getReports);
 
 // route for get single report
-router.get("/getReport/:id", getReport); //TODO: verify token and verify admin will be added
+router.get("/getReport/:id", verifyToken, verifyAdmin, getReport);
 
 export default router;
