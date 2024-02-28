@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+    banPermanent,
     banUser,
     getBanUsers,
     unBanUser,
@@ -17,5 +18,7 @@ router.delete("/unBan/:id", verifyToken, verifyAdmin, unBanUser);
 
 // route to unBan user
 router.get("/getBanned/", verifyToken, verifyAdmin, getBanUsers);
+
+router.put("/permanent", verifyToken, verifyAdmin, banPermanent);
 
 export default router;

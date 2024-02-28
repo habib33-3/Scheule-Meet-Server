@@ -1,6 +1,9 @@
 import { BannedUsers } from "../models/bannedUser.model.js";
 import { User } from "../models/user.model.js";
+import sendMail from "../services/sendMail.js";
 import banUserTemplate from "../templates/banUser.template.js";
+import permanentBanUserTemplate from "../templates/permanentBan.template.js";
+import unBanUserTemplate from "../templates/unBan.template.js";
 
 const banUser = async (req, res) => {
     try {
@@ -17,7 +20,7 @@ const banUser = async (req, res) => {
             });
         }
 
-        const added = await BannedUsers.create(banInfo);
+        await BannedUsers.create(banInfo);
 
         const query = { _id: banInfo.userId };
 
@@ -33,8 +36,17 @@ const banUser = async (req, res) => {
             }
         );
 
-//    console.log(updated)
-   console.log(updated?.name)
+        const mailBody = banUserTemplate(
+            updated.name,
+            banInfo.reason,
+            banInfo.bannedFrom
+        );
+
+        await sendMail(
+            banInfo.userEmail,
+            "You have been banned from Schedule Meet",
+            mailBody
+        );
 
         res.status(200).json({
             message: "User banned Successfully",
@@ -59,7 +71,7 @@ const unBanUser = async (req, res) => {
 
         const updateQuery = { _id: userId };
 
-        await User.findOneAndUpdate(
+        const updated = await User.findOneAndUpdate(
             updateQuery,
             {
                 $set: {
@@ -73,7 +85,13 @@ const unBanUser = async (req, res) => {
 
         await BannedUsers.deleteOne(deleteQuery);
 
-        //    TODO: mail will be implemented
+        const mailBody = unBanUserTemplate(updated.name);
+
+        await sendMail(
+            updated.userEmail,
+            "Your ban has been revoked in Schedule Meet",
+            mailBody
+        );
 
         res.status(200).json({
             message: "User unBanned Successfully",
@@ -123,6 +141,21 @@ const banPermanent = async (req, res) => {
         );
 
         console.log(updated);
+
+        const user = await User.findById(userId);
+
+        const mailBody = permanentBanUserTemplate(user.name, updated.reason);
+
+        await sendMail(user.email, "You are permanently banned", mailBody);
+
+        const deleted = await User.findByIdAndDelete(userId);
+
+        console.log(deleted);
+
+        res.status(200).json({
+            message: "User is permanently banned successfully",
+            success: true,
+        });
     } catch (error) {
         console.log("server error during ban permanently", error);
         res.status(500).json({
@@ -132,4 +165,4 @@ const banPermanent = async (req, res) => {
     }
 };
 
-export { banUser, unBanUser, getBanUsers };
+export { banUser, unBanUser, getBanUsers, banPermanent };
