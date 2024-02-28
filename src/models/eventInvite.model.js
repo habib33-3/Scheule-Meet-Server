@@ -14,13 +14,8 @@ const InviteSchema = new Schema(
 
         hostName: {
             type: String,
-            
         },
-        eventType: {
-            type: String,
-            enum: ["event", "meeting"],
-        },
-        
+
         eventId: {
             type: Schema.Types.ObjectId,
             required: true,
@@ -44,4 +39,4 @@ const InviteSchema = new Schema(
     }
 );
 
-export const Invite = model("invites", InviteSchema);
+export const eventInvite = model("eventInvites", InviteSchema);
