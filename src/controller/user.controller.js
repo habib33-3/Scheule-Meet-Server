@@ -5,28 +5,27 @@ import jwt from "jsonwebtoken";
 // controller for save user to db
 const saveUserToDb = async (req, res) => {
     try {
-        const user = req.body;
+        const { email, name } = req.body;
 
-        if (!user.email) {
+        // Validate if the email is provided
+        if (!email) {
             return res.status(400).json({
-                message: " Please provide a valid email",
+                message: "Please provide a valid email",
                 success: false,
             });
         }
 
-        const isBanned = await BannedUsers.findOne({ userEmail: user.email });
-
-        console.log(isBanned)
-
+        // Check if the user is banned
+        const isBanned = await BannedUsers.findOne({ userEmail: email });
         if (isBanned) {
             return res.status(400).json({
-                message: "user is banned",
-                success: true,
+                message: "User is banned",
+                success: false,
             });
         }
 
-        const isExists = await User.findOne({ email: user.email });
-
+        // Check if the user already exists
+        const isExists = await User.findOne({ email });
         if (isExists) {
             return res.status(200).json({
                 message: "User already exists",
@@ -34,7 +33,17 @@ const saveUserToDb = async (req, res) => {
             });
         }
 
-        await User.create(user);
+        // If 'name' is not provided, extract it from the email
+        const parsedName = name || email.split("@")[0];
+
+        // Create user object to save in the database
+        const userInfo = {
+            email,
+            name: parsedName,
+        };
+
+        // Save the user to the database
+        await User.create(userInfo);
 
         return res.status(200).json({
             message: "User saved to database",
@@ -42,7 +51,7 @@ const saveUserToDb = async (req, res) => {
         });
     } catch (error) {
         console.error("Server Error during saving user to db", error);
-        res.status(500).json({
+        return res.status(500).json({
             message: "Server Error during saving user to db",
             success: false,
         });
@@ -128,7 +137,7 @@ const createToken = async (req, res) => {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
             sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
-            expires: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000), // expires in 10 days
+            expires: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000),
         })
             .status(200)
             .send({

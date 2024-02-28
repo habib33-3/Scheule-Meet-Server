@@ -33,7 +33,8 @@ const banUser = async (req, res) => {
             }
         );
 
-        //    TODO: mail will be implemented
+//    console.log(updated)
+   console.log(updated?.name)
 
         res.status(200).json({
             message: "User banned Successfully",
