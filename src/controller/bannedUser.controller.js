@@ -108,7 +108,20 @@ const unBanUser = async (req, res) => {
 
 const getBanUsers = async (req, res) => {
     try {
-        const banUsers = await BannedUsers.find();
+        const query = {
+            $or: [
+                {
+                    isPermanent: false,
+                },
+                {
+                    isPermanent: {
+                        $exists: false,
+                    },
+                },
+            ],
+        };
+
+        const banUsers = await BannedUsers.find(query);
         return res.status(200).json({
             message: "Users fetched",
             success: true,
@@ -140,17 +153,13 @@ const banPermanent = async (req, res) => {
             { new: true }
         );
 
-        console.log(updated);
-
         const user = await User.findById(userId);
 
         const mailBody = permanentBanUserTemplate(user.name, updated.reason);
 
         await sendMail(user.email, "You are permanently banned", mailBody);
 
-        const deleted = await User.findByIdAndDelete(userId);
-
-        console.log(deleted);
+        await User.findByIdAndDelete(userId);
 
         res.status(200).json({
             message: "User is permanently banned successfully",

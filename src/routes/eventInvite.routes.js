@@ -1,10 +1,11 @@
 import { Router } from "express";
-import { inviteUser } from "../controller/invite.controller.js";
+
 import verifyToken from "../middlewares/verifyToken.middleware.js";
+import { inviteToEvent } from "../controller/eventInvite.controller.js";
 
 const router = Router();
 
 // routes for invite user
-router.post("/inviteUser", verifyToken, inviteUser);
+router.post("/inviteUser", verifyToken, inviteToEvent);
 
 export default router;
