@@ -18,9 +18,10 @@ const saveUserToDb = async (req, res) => {
         // Check if the user is banned
         const isBanned = await BannedUsers.findOne({ userEmail: email });
         if (isBanned) {
-            return res.status(400).json({
+            return res.json({
                 message: "User is banned",
                 success: false,
+                banned: true,
             });
         }
 
