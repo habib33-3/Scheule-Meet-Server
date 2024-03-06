@@ -46,7 +46,9 @@ const postAdvert = async (req, res) => {
 
 const getAds = async (req, res) => {
     try {
-        const ads = await Advertisement.find();
+        const ads = await Advertisement.find({
+            isPaid: true,
+        });
 
         res.status(200).json({
             message: "ads fetched ",

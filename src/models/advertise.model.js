@@ -23,6 +23,15 @@ const AdvertiseSchema = new Schema(
             type: String,
             required: true,
         },
+
+        isPaid: {
+            type: Boolean,
+            default: false,
+        },
+
+        adPayment: {
+            type: Number,
+        },
     },
     {
         timestamps: true,
